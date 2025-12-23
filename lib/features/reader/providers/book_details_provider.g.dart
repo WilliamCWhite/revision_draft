@@ -63,7 +63,7 @@ final class BookDetailsProvider
   }
 }
 
-String _$bookDetailsHash() => r'4b43bd5f411d6316be9ea61080f4d713150054b9';
+String _$bookDetailsHash() => r'50540237c04bf3f7a21c3574a67081dd780a1696';
 
 final class BookDetailsFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<BookModel>, int> {

@@ -17,39 +17,8 @@ class ReaderScreen extends ConsumerWidget {
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, stack) => Center(child: Text('Error: $err')),
         data: (book) {
-          final colorInt = int.tryParse(book.color) ?? 0xFFCCCCCC;
-          final bookColor = Color(colorInt);
-
-          return CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                expandedHeight: 200,
-                pinned: true,
-                backgroundColor: bookColor,
-                flexibleSpace: FlexibleSpaceBar(
-                  title: Text(
-                    book.title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      shadows: [Shadow(color: Colors.black45, blurRadius: 10)],
-                    ),
-                  ),
-                  background: Container(color: bookColor),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Text(
-                    book.content,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      height: 1.6, // Better readability
-                    ),
-                  ),
-                ),
-              ),
-            ],
+          return Scaffold(
+            body: Column(children: [Text(book.title), Text(book.author)]),
           );
         },
       ),
