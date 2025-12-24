@@ -42,7 +42,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -51,7 +51,8 @@ class AppDatabase extends _$AppDatabase {
 
       // Load and execute the seed SQL
       final script = await rootBundle.loadString('assets/sql/seed.sql');
-      final statements = script.split(';');
+      // Split by regex so any old semicolon doesn't create errors
+      final statements = script.split(RegExp(r';\s*(\r\n|\n|$)'));
 
       for (final statement in statements) {
         if (statement.trim().isNotEmpty) {
