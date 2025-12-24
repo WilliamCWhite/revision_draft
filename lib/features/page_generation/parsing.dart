@@ -21,7 +21,7 @@ class ChunkParser {
   }
 
   TextSpan stringWordConverter(String word) {
-    // TODO: Update this to be wayyyy more efficient, run super frequently
+    // TODO: Update this to be much more efficient, it runs very frequently
 
     // Ensure current styles are up to date with word
     if (!currentlyBold) {
@@ -64,7 +64,7 @@ class ChunkParser {
     return wordSpan;
   }
 
-  TextSpan generateSpan(
+  static TextSpan generateSpan(
     String word,
     bool isBold,
     bool isItalic,
@@ -93,7 +93,7 @@ class ChunkParser {
     );
   }
 
-  List<String> splitHyphenatedWords(List<String> words) {
+  static List<String> splitHyphenatedWords(List<String> words) {
     return words.expand((word) {
       if (!word.contains('-')) return [word];
 
