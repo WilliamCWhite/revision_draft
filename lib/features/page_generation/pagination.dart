@@ -15,22 +15,19 @@ import 'package:flutter/material.dart';
 import 'package:revision_draft/shared/models/page_content.dart';
 import 'package:revision_draft/features/page_generation/parsing.dart';
 import 'package:revision_draft/shared/models/book_models.dart';
+import 'package:revision_draft/shared/models/user_settings.dart';
 import 'dart:math';
 
 class Paginator {
   final double pageWidth;
   final double pageHeight;
-  // i.e. x font, x font size, x color, should include textBaseline: alphabetic
-  final TextStyle defaultStyle;
-  // i.e. justify, left, right, center
-  final TextAlign alignment;
+  final UserSettings userSettings;
   int wordsPerIteration;
 
   Paginator({
     required this.pageWidth,
     required this.pageHeight,
-    required this.defaultStyle,
-    required this.alignment,
+    required this.userSettings,
     this.wordsPerIteration = 100,
   });
 
@@ -38,8 +35,8 @@ class Paginator {
 
   PageContent generatePage() {
     TextPainter textPainter = TextPainter(
-      textDirection: TextDirection.ltr,
-      textAlign: alignment,
+      textDirection: userSettings.textDirection,
+      textAlign: userSettings.textAlignment,
     );
 
     bool isFull = false;
@@ -115,5 +112,12 @@ class Paginator {
     List<TextSpan> flattened = parsedChunks.expand((list) => list).toList();
 
     spans.addAll(flattened);
+  }
+
+  bool canCreatePage() {
+    if (spans.isEmpty) {
+      return false;
+    }
+    return true;
   }
 }
